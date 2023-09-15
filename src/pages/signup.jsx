@@ -1,10 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RxAvatar } from "react-icons/rx";
 
 
 
 
 function Signup() {
+  
+  const [name,setName]=useState("");
+  const[number,setNumber]=useState("");
+  const[email,setEmail]=useState("");
+  const[password,setPassword]=useState("");
+  const [avatar,setAvatar]=useState(null)
+
+  const handleSubmit =()=>{
+    console.log("sjdhsdgj")
+  }
+
+  const handleFileInputChange=(e)=>{
+    const file=e.target.files[0]
+    setAvatar(file);
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -14,7 +30,7 @@ function Signup() {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-rose-600 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" >
+          <form className="space-y-6" onClick={handleSubmit} >
             <div>
               <label
                 htmlFor="email"
@@ -25,9 +41,11 @@ function Signup() {
               <div className="mt-1">
                 <input
                   type="text"
-                  name="text"
+                  name="name"
                   autoComplete="name"
                   required
+                  value={name}
+                  onChange={(e)=>setName(e.target.value)}
                  
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
@@ -48,7 +66,8 @@ function Signup() {
                   name="number"
                   autoComplete="number"
                   required
-                 
+                  value={number}
+                  onChange={(e)=>setNumber(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -67,7 +86,8 @@ function Signup() {
                   name="email"
                   autoComplete="email"
                   required
-                 
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -86,8 +106,8 @@ function Signup() {
                   name="password"
                   autoComplete="current-password"
                   required
-                //   value={password}
-                //   onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
                 {/* {visible ? (
@@ -113,15 +133,15 @@ function Signup() {
               ></label>
               <div className="mt-2 flex items-center">
                 <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
-                 
+                  {avatar ? (
                     <img
-                      src=""
+                      src={avatar}
                       alt="avatar"
                       className="h-full w-full object-cover rounded-full"
                     />
-                   
+                  ) : (
                     <RxAvatar className="h-8 w-8" />
-                  
+                  )}
                 </span>
                 <label
                   htmlFor="file-input"
@@ -132,8 +152,8 @@ function Signup() {
                     type="file"
                     name="avatar"
                     id="file-input"
-                    accept=".jpg,.jpeg,.png"
-                    // onChange={handleFileInputChange}
+                    accept="image/*"
+                    onChange={handleFileInputChange}
                     className="sr-only"
                   />
                 </label>
